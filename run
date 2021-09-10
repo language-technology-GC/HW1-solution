@@ -1,0 +1,25 @@
+#!/bin/bash
+
+set -eou pipefail
+
+readonly WS353=data/ws353.tsv
+
+# Part 1.
+echo "Computing WordNet correlations and coverages..."
+./wordnet_sim.py --ws353_path "${WS353}"
+
+# Part 2.
+echo "Downloading news crawl data..."
+curl -O http://data.statmt.org/news-crawl/en/news.2020.en.shuffled.deduped.gz
+# The scripts below are set up so that if you download more of these in this
+# directory it will process them all.
+echo "Tokenizing news crawl data..."
+readonly TOK=news.tok
+gunzip -c *.gz | ./word_tokenize.py > "${TOK}"
+echo "Training word2vec model..."
+readonly MODEL=news.wv
+./word2vec.py --ws353_path "${WS353}" --tok_path "${TOK}" --model_path "${MODEL}"
+echo "Computing word2vec correlation and coverage..."
+./word2vec_sim.py --ws353_path "${WS353}" --model_path "${MODEL}"
+echo "Cleaning up..."
+rm -rf *.gz "${TOK}" "${MODEL}"
