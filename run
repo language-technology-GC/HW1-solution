@@ -6,7 +6,7 @@ readonly WS353=data/ws353.tsv
 
 # Part 1.
 echo "Computing WordNet correlations and coverages..."
-./wordnet_sim.py --ws353_path "${WS353}"
+#./wordnet_sim.py --ws353_path "${WS353}"
 
 # Part 2.
 echo "Downloading news crawl data..."
