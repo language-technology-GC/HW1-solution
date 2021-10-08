@@ -6,7 +6,7 @@ readonly WS353=data/ws353.tsv
 
 # Part 1.
 echo "Computing WordNet correlations and coverages..."
-#./wordnet_sim.py --ws353_path "${WS353}"
+./wordnet_sim.py --ws353_path "${WS353}"
 
 # Part 2.
 echo "Downloading news crawl data..."
@@ -18,7 +18,7 @@ readonly TOK=news.tok
 gunzip -c *.gz | ./word_tokenize.py > "${TOK}"
 echo "Training word2vec model..."
 readonly MODEL=news.wv
-./word2vec.py --ws353_path "${WS353}" --tok_path "${TOK}" --model_path "${MODEL}"
+./word2vec.py --tok_path "${TOK}" --model_path "${MODEL}"
 echo "Computing word2vec correlation and coverage..."
 ./word2vec_sim.py --ws353_path "${WS353}" --model_path "${MODEL}"
 echo "Cleaning up..."

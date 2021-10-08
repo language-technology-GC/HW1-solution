@@ -79,7 +79,7 @@ def main(args: argparse.Namespace) -> None:
     data["y"] = data["y"].str.casefold()
     # Grabs synset pairs.
     synset_pairs: List[Tuple[Synset, Synset]] = []
-    for (_, w1, w2, score) in data.itertuples():
+    for _, w1, w2, score in data.itertuples():
         s1 = SimilarityCalculator.synset(w1)
         s2 = SimilarityCalculator.synset(w2)
         synset_pairs.append((s1, s2))

@@ -18,10 +18,10 @@ def main(args: argparse.Namespace) -> None:
         seen = 0
         word2vec_sim = []
         human_sim = []
-        for (x, y, sim) in reader:
+        for w1, w2, human_sim_str in reader:
             try:
-                word2vec_sim.append(wv.similarity(x, y))
-                human_sim.append(float(sim))
+                word2vec_sim.append(wv.similarity(w1, w2))
+                human_sim.append(float(human_sim_str))
                 covered += 1
             except KeyError:
                 pass
@@ -42,5 +42,4 @@ if __name__ == "__main__":
     parser.add_argument(
         "--model_path", required=True, help="path to input word2vec model file"
     )
-
     main(parser.parse_args())

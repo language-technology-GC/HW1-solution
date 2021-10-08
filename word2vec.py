@@ -33,11 +33,6 @@ if __name__ == "__main__":
     )
     parser.add_argument("--min_count", default=5, help="min count")
     parser.add_argument(
-        "--ws353_path",
-        required=True,
-        help="path to ws353 TSV file",
-    )
-    parser.add_argument(
         "--vector_size",
         default=100,
         help="embedding size (default: %(default)s)",
